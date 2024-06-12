@@ -24,7 +24,7 @@ RDP1=port you would like to use to access RDP
 FTP1=port you would like to use to access FTP 
 COMPANY_NAME=Name here
 SERVER_NAME=Server Name
-KEY_PATH=.\key
+KEY_PATH=key
 
 
 ## ONLY EDIT BELOW THIS LINE IF YOU ARE SURE YOU WANT TO MAKE THE CHANGES, ADDING MORE VARIABLES WILL MEAN YOU NEED TO EDIT THE CONNECT.PS1 File 
