@@ -1,12 +1,12 @@
-# windowsRDP-SSH-tunnel-script
+# windowsRDP-FTP-SSH-tunnel-script
 
-These scripts are to be used to open an SSH connection and create an SSH tunnel for windows RDP and/or FTP, the script can be edited by editing the connect.ps1 file.
+These scripts are to be used to open an SSH connection and create an SSH tunnel for Windows RDP and/or FTP, the script can be edited by editing the connect.ps1 file.
 
-it will also install all dependancies on first run
+it will also install all dependencies on the first run
 
 ## Setup
 
-### Step 1 - Put Required files in folder
+### Step 1 - Put the Required files in the folder
 
 rename your private key file to ``key`` and put it in the folder
 
@@ -14,7 +14,7 @@ create a ``connection.rdp`` file in the folder, for the server and user you woul
 
 ### Step 2 - Edit config.env
 
-Open the config.env file in your prefered editor E.g VSCode and edit the variables at the very top only changing the ones below the comment if you are sure of what you are doing
+Open the config.env file in your preferred editor E.g VSCode and edit the variables at the very top only changing the ones below the comment if you are sure of what you are doing
 
 ```
 USER=User here
@@ -39,9 +39,9 @@ as the title says if you want the folder to be simple to use hide everything exc
 
 ## Step 3 - Run
 
-to run the script just double click the link.bat file
+to run the script just double-click the link.bat file
 
 #### Note
 
-on first run the script will ask for admin privilages this is to run the installSSH.ps1 script which install the required dependancies and then creates a blank text file which the script will find in future and know it doesnt need to install them.
+on the first run, the script will ask for admin privileges this is to run the installSSH.ps1 script which installs the required dependencies and then creates a blank text file which the script will find in future and know it doesn't need to install them.
 
