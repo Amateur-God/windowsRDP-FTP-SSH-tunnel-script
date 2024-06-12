@@ -69,15 +69,15 @@ Write-Host "Establishing link to $ServerName." -ForegroundColor DarkYellow
 Write-Host ""
 
 # Prompt user for which tunnels to open
-$rdpResponse = Read-Host "Would you like to open the RDP tunnel? (yes/y/no)"
-$ftpResponse = Read-Host "Would you like to open the FTP tunnel? (yes/y/no)"
+$rdpResponse = Read-Host "Would you like to open the RDP tunnel? (yes/no)"
+$ftpResponse = Read-Host "Would you like to open the FTP tunnel? (yes/no)"
 
 # Build SSH command based on user responses
 $sshCommand = "ssh -p $port $user@$ip -N"
-if ($rdpResponse -eq "yes" -or $rdpResponse -eq "y") {
+if ($rdpResponse.Substring(0, 1).ToLower() -eq "y") {
     $sshCommand += " -L ${RDP1}:${h1}:${h1p}"
 }
-if ($ftpResponse -eq "yes" -or $ftpResponse -eq "y") {
+if ($ftpResponse.Substring(0, 1).ToLower() -eq "y") {
     $sshCommand += " -L ${FTP1}:${h1}:${h2p}"
 }
 $sshCommand += " -i $keyPath"
@@ -98,17 +98,17 @@ $connectedRDP = $false
 $connectedFTP = $false
 $startTime = Get-Date
 
-while ((-not $connectedRDP -and ($rdpResponse -eq "yes" -or $rdpResponse -eq "y")) -or (-not $connectedFTP -and ($ftpResponse -eq "yes" -or $ftpResponse -eq "y")) -and (New-TimeSpan -Start $startTime -End (Get-Date)).TotalSeconds -lt $timeout) {
-    if ($rdpResponse -eq "yes" -or $rdpResponse -eq "y") {
+while ((-not $connectedRDP -and $rdpResponse.Substring(0, 1).ToLower() -eq "y") -or (-not $connectedFTP -and $ftpResponse.Substring(0, 1).ToLower() -eq "y") -and (New-TimeSpan -Start $startTime -End (Get-Date)).TotalSeconds -lt $timeout) {
+    if ($rdpResponse.Substring(0, 1).ToLower() -eq "y") {
         $connectedRDP = Test-NetConnection -ComputerName $h1 -Port $RDP1 -WarningAction SilentlyContinue | Select-Object -ExpandProperty TcpTestSucceeded
     }
-    if ($ftpResponse -eq "yes" -or $ftpResponse -eq "y") {
+    if ($ftpResponse.Substring(0, 1).ToLower() -eq "y") {
         $connectedFTP = Test-NetConnection -ComputerName $h1 -Port $FTP1 -WarningAction SilentlyContinue | Select-Object -ExpandProperty TcpTestSucceeded
     }
     Start-Sleep -Seconds 1
 }
 
-if ((-not $connectedRDP -and ($rdpResponse -eq "yes" -or $rdpResponse -eq "y")) -or (-not $connectedFTP -and ($ftpResponse -eq "yes" -or $ftpResponse -eq "y"))) {
+if ((-not $connectedRDP -and $rdpResponse.Substring(0, 1).ToLower() -eq "y") -or (-not $connectedFTP -and $ftpResponse.Substring(0, 1).ToLower() -eq "y")) {
     Write-Host ""
     Write-Host "Connection could not be established within $timeout seconds." -ForegroundColor Red
     Write-Host "Your link to the $CompanyName servers has not been established." -ForegroundColor Red
@@ -125,12 +125,12 @@ Write-Host "If the remote connection doesn't automatically open and" -Foreground
 Write-Host "start connecting, Use the below Details to connect to" -ForegroundColor Blue
 Write-Host "the relevant services:" -ForegroundColor Blue
 Write-Host "---------------------------------------------------------" -ForegroundColor Blue
-if ($rdpResponse -eq "yes" -or $rdpResponse -eq "y") {
+if ($rdpResponse.Substring(0, 1).ToLower() -eq "y") {
     Write-Host "Remote Desktop Connection:" -ForegroundColor Blue
     Write-Host "IP: $h1" -ForegroundColor Blue
     Write-Host "Port: $RDP1" -ForegroundColor Blue
 }
-if ($ftpResponse -eq "yes" -or $ftpResponse -eq "y") {
+if ($ftpResponse.Substring(0, 1).ToLower() -eq "y") {
     Write-Host "FTP:" -ForegroundColor Blue
     Write-Host "IP: $h1" -ForegroundColor Blue
     Write-Host "Port: $FTP1" -ForegroundColor Blue
@@ -140,9 +140,9 @@ Write-Host "---------------------------------------------------------" -Foregrou
 Write-Host "" -ForegroundColor Blue
 
 # Ask the user if they want to open the remote desktop connection
-if ($rdpResponse -eq "yes" -or $rdpResponse -eq "y") {
-    $openRDP = Read-Host "Would you like to open the remote desktop connection now? (yes/y/no)"
-    if ($openRDP -eq "yes" -or $openRDP -eq "y") {
+if ($rdpResponse.Substring(0, 1).ToLower() -eq "y") {
+    $openRDP = Read-Host "Would you like to open the remote desktop connection now? (yes/no)"
+    if ($openRDP.Substring(0, 1).ToLower() -eq "y") {
         Write-Host "Opening remote desktop connection window" -ForegroundColor DarkYellow
         # Open RDP window
         Start-Process mstsc 'connection.rdp'
