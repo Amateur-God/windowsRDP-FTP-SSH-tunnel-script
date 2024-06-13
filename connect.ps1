@@ -117,9 +117,9 @@ if ((-not $connectedRDP -and $rdpResponse.Substring(0, 1).ToLower() -eq "y") -or
     Exit # Exits if the tunnel isn't established
 }
 
-Write-Host "" 
+Write-Host ""
 Write-Host "Link to $ServerName Established" -ForegroundColor Green
-Write-Host "" 
+Write-Host ""
 Write-Host "---------------------------------------------------------" -ForegroundColor Blue
 Write-Host "If the remote connection doesn't automatically open and" -ForegroundColor Blue
 Write-Host "start connecting, Use the below Details to connect to" -ForegroundColor Blue
@@ -146,13 +146,13 @@ if ($rdpResponse.Substring(0, 1).ToLower() -eq "y") {
         Write-Host "Opening remote desktop connection window" -ForegroundColor DarkYellow
         # Open RDP window
         Start-Process mstsc 'connection.rdp'
-        Write-Host "" 
+        Write-Host ""
         Write-Host "Window Opened" -ForegroundColor Green
     } else {
         Write-Host "You chose not to open the remote desktop connection." -ForegroundColor Yellow
     }
 }
 
-Write-Host "" 
+Write-Host ""
 Write-Host "Keep this PowerShell window open!" -ForegroundColor Blue
 Write-Host "When you close this window, it will close your link to the $CompanyName servers." -ForegroundColor Blue
