@@ -1,5 +1,9 @@
 # windowsRDP-FTP-SSH-tunnel-script
 
+[![CI](https://github.com/Amateur-God/windowsRDP-FTP-SSH-tunnel-script/actions/workflows/ci.yml/badge.svg)](https://github.com/Amateur-God/windowsRDP-FTP-SSH-tunnel-script/actions/workflows/ci.yml)
+
+Contributions welcome — see [CONTRIBUTING.md](.github/CONTRIBUTING.md). PRs require DCO sign-off (`git commit -s`).
+
 These scripts are to be used to open an SSH connection and create an SSH tunnel for Windows RDP and/or FTP, the script can be edited by editing the connect.ps1 file.
 
 it will also install all dependencies on the first run
